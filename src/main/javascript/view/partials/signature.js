@@ -477,7 +477,12 @@ SwaggerUi.partials.signature = (function () {
     var output;
 
     if (!_.isUndefined(schema.example)) {
-      output = schema.example;
+      if('array' === schema.type) {
+        output = [];
+        output.push(schema.example);
+      } else {
+        output = schema.example;
+      }
     } else if (_.isUndefined(schema.items) && _.isArray(schema.enum)) {
       output = schema.enum[0];
     }
